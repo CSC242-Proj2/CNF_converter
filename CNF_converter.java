@@ -1,7 +1,4 @@
-
-public class CNF_converter {
-	
-	import java.io.File;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -90,7 +87,4 @@ public class CNF_converter {
         File file = new File("nqueens_4.cnf");
         readFile(file);
     }
-}
-
-	
 }
