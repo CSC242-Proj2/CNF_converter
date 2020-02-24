@@ -1,4 +1,4 @@
-import java.io.File;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -46,8 +46,10 @@ public class CNF_converter {
 
     public static void readFile(File file){
         try{
+            int x = 0;
             Scanner sc = new Scanner(file);
             while (sc.hasNextLine()){
+                System.out.println("x " + x++);
                 String nextLine = sc.nextLine();
                 Scanner inner = new Scanner(nextLine);
                 String first = inner.next();
@@ -64,7 +66,7 @@ public class CNF_converter {
                     clauseNum = inner.nextInt();
                     System.out.println("The number of vars is " + varNum + " clauses " + clauseNum);
                 }
-                else {
+                else  {
                     ArrayList<Integer> cnfClauses = new ArrayList<>();
                     cnfClauses.add(Integer.parseInt(first));
                     int cl = inner.nextInt();
@@ -79,12 +81,13 @@ public class CNF_converter {
             }
             printClauses(clauses);
         }catch (Exception e){
+            printClauses(clauses);
             System.out.println(e);
         }
     }
 
     public static void main(String[] args) {
-        File file = new File("nqueens_4.cnf");
+        File file = new File("nqueens_8.cnf");
         readFile(file);
     }
 }
