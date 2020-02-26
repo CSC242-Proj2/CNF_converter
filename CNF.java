@@ -93,6 +93,70 @@ public class CNF {
         this.clauses.add(cl);
     }
 
+    //Part two CNF definitions
+    //{P, P ⇒ Q} |= Q
+    public CNF p_q(){
+        CNF p_q = new CNF(2,2);
+        int[] p = {1};
+        int[] p_imp_q = {-1,2};
+        p_q.addClause(p);
+        p_q.addClause(p_imp_q);
+        return p_q;
+    }
+
+    //Wumpus World problem without percepts
+    public CNF wumpus(){
+        CNF wumpus = new CNF(9,12);
+        int[] r1 = {-1};
+        int[] r2_1 = {-7,2,4};
+        int[] r2_2 = {-2,7};
+        int[] r2_3 = {-4,7};
+        int[] r3_1 = {-9,1,5,6};
+        int[] r3_2 = {-1,9};
+        int[] r3_3 = {-5,9};
+        int[] r3_4 = {-6,9};
+        int[] r7_1 = {-8,1,5,3};
+        int[] r7_2 = {-1,8};
+        int[] r7_3 = {-5,8};
+        int[] r7_4 = {-3,8};
+        
+        wumpus.addClause(r1);
+        wumpus.addClause(r2_1);
+        wumpus.addClause(r2_2);
+        wumpus.addClause(r2_3);
+        wumpus.addClause(r3_1);
+        wumpus.addClause(r3_2);
+        wumpus.addClause(r3_3);
+        wumpus.addClause(r3_4);
+        wumpus.addClause(r7_1);
+        wumpus.addClause(r7_2);
+        wumpus.addClause(r7_3);
+        wumpus.addClause(r7_4);
+
+        return wumpus;
+
+    }
+
+    //(Russell & Norvig) Unicorn problem
+    public CNF unicorn(){
+        CNF unicorn = new CNF(5,6);
+        int[] r1 = {-1,2};
+        int[] r2_1 = {1,-2};
+        int[] r2_2 = {1,3};
+        int[] r3_1 =  {-2,4};
+        int[] r3_2 = {-3,4};
+        int[] r4 = {-4,5};
+
+        unicorn.addClause(r1);
+        unicorn.addClause(r2_1);
+        unicorn.addClause(r2_2);
+        unicorn.addClause(r3_1);
+        unicorn.addClause(r3_2);
+        unicorn.addClause(r4);
+
+        return unicorn;
+    }
+
 
     public static void main(String[] args) {
         CNF c = new CNF(0,0);
