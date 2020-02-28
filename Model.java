@@ -1,11 +1,12 @@
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class Model {
 
-    ArrayList<Boolean> model;
+    ArrayList<Boolean> models;
 
     public Model(){
-
+        models = new ArrayList<>();
     }
 //    • Given knowledge α and query β
 //      • For every possible world w
@@ -14,13 +15,26 @@ public class Model {
 //                  • Conclude that α ⊭ β
 //      • Conclude that α ⊨ β
 
-//    function TT-ENTAILS?(KB,α) returns true or false
+    public static boolean  tt_Entails(CNF KB, CNF a){
+        //    function TT-ENTAILS?(KB,α) returns true or false
 //      inputs: KB, the knowledge base, a sentence in propositional logic
 //          α, the query, a sentence in propositional logic
 //      symbols ← a list of the proposition symbols in KB and α
 //      return TT-CHECK-ALL(KB,α,symbols,{ })
+        Model m = new Model();
+        ArrayList<Integer> symbols = new ArrayList<>();
+        for(int[] arr : KB.clauses){
+            for (int i = 0; i < arr.length; i++) {
+                if(!symbols.contains(arr[i])){
+                    symbols.add(arr[i]);
+                }
+            }
+        }
+        return tt_check(KB,a, symbols, m);
+    }
 
-//    function TT-CHECK-ALL(KB,α,symbols,model) returns true or false
+    public static boolean tt_check(CNF KB, CNF a, ArrayList<Integer> symbols, Model m){
+        //    function TT-CHECK-ALL(KB,α,symbols,model) returns true or false
 //       if EMPTY?(symbols) then
 //            if PL-TRUE?(KB,model) then return PL-TRUE?(α,model)
 //            else return true // when KB is false, always return true
@@ -30,5 +44,52 @@ public class Model {
 //            return (TT-CHECK-ALL(KB,α,rest,model ∪ {P = true})
 //              and
 //              TT-CHECK-ALL(KB,α,rest,model ∪ {P = false }))
+        if(symbols.isEmpty()){
+            if(pl_true(KB,m)){
+                return pl_true(a,m);
+            }
+            else {
+                return true;
+            }
+        }
+        else {
+            Integer p = symbols.get(1);
+            ArrayList<Integer> rest = new ArrayList<>();
+//            Model rest = new Model();
+//            for (int i = 2; i < symbols.models.size(); i++) {
+//                rest_models.add(symbols.models.get(i));
+//            }
+//            rest.models = rest_models;
 
+            for (int i = 2; i < symbols.size(); i++) {
+                rest.add(symbols.get(i));
+            }
+            return (tt_check(KB,a,rest,union(m,p, true)))
+                    && (tt_check(KB,a,rest,union(m,p, false)));
+        }
+    }
+
+    public static boolean pl_true(CNF KB, Model m){
+        HashSet<int[]> cnf = KB.clauses;
+        for(int[] arr : cnf){
+            for (int i = 0; i < arr.length; i++) {
+                if(arr[i] > 0){
+                    if(!m.models.get(Math.abs(arr[i]))){
+                        return false;
+                    }
+                }
+                else if(arr[i] < 0){
+                    if(m.models.get(Math.abs(arr[i]))){
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
+    public static Model union(Model m, Integer p, Boolean val){
+        m.models.add(Math.abs(p),val);
+        return m;
+    }
 }

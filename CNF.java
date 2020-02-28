@@ -95,7 +95,7 @@ public class CNF {
 
     //Part two CNF definitions
     //{P, P ⇒ Q} |= Q
-    public CNF p_q(){
+    public static CNF p_q(){
         CNF p_q = new CNF(2,2);
         int[] p = {1};
         int[] p_imp_q = {-1,2};
@@ -105,7 +105,7 @@ public class CNF {
     }
 
     //Wumpus World problem without percepts
-    public CNF wumpus(){
+    public static CNF wumpus(){
         CNF wumpus = new CNF(9,12);
         int[] r1 = {-1};
         int[] r2_1 = {-7,2,4};
@@ -119,7 +119,7 @@ public class CNF {
         int[] r7_2 = {-1,8};
         int[] r7_3 = {-5,8};
         int[] r7_4 = {-3,8};
-        
+
         wumpus.addClause(r1);
         wumpus.addClause(r2_1);
         wumpus.addClause(r2_2);
@@ -138,7 +138,7 @@ public class CNF {
     }
 
     //(Russell & Norvig) Unicorn problem
-    public CNF unicorn(){
+    public static CNF unicorn(){
         CNF unicorn = new CNF(5,6);
         int[] r1 = {-1,2};
         int[] r2_1 = {1,-2};
