@@ -25,11 +25,12 @@ public class Model {
         ArrayList<Integer> symbols = new ArrayList<>();
         for(int[] arr : KB.clauses){
             for (int i = 0; i < arr.length; i++) {
-                if(!symbols.contains(arr[i])){
-                    symbols.add(arr[i]);
+                if(!symbols.contains(Math.abs(arr[i]))){
+                    symbols.add(Math.abs(arr[i]));
                 }
             }
         }
+        System.out.println(symbols);
         return tt_check(KB,a, symbols, m);
     }
 
@@ -45,6 +46,7 @@ public class Model {
 //              and
 //              TT-CHECK-ALL(KB,α,rest,model ∪ {P = false }))
         if(symbols.isEmpty()){
+            System.out.println("Here");
             if(pl_true(KB,m)){
                 return pl_true(a,m);
             }
@@ -53,7 +55,7 @@ public class Model {
             }
         }
         else {
-            Integer p = symbols.get(1);
+            Integer p = symbols.get(0);
             ArrayList<Integer> rest = new ArrayList<>();
 //            Model rest = new Model();
 //            for (int i = 2; i < symbols.models.size(); i++) {
@@ -61,11 +63,11 @@ public class Model {
 //            }
 //            rest.models = rest_models;
 
-            for (int i = 2; i < symbols.size(); i++) {
+            for (int i = 1; i < symbols.size(); i++) {
                 rest.add(symbols.get(i));
             }
-            return (tt_check(KB,a,rest,union(m,p, true)))
-                    && (tt_check(KB,a,rest,union(m,p, false)));
+            return (tt_check(KB,a,rest,union(m,true)))
+                    && (tt_check(KB,a,rest,union(m,false)));
         }
     }
 
@@ -88,8 +90,8 @@ public class Model {
         return true;
     }
 
-    public static Model union(Model m, Integer p, Boolean val){
-        m.models.add(Math.abs(p),val);
+    public static Model union(Model m, Boolean val){
+        m.models.add(val);
         return m;
     }
 }
