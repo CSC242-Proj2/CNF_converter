@@ -7,6 +7,7 @@ public class Model {
 
     public Model(){
         models = new ArrayList<>();
+        models.add(new Boolean(null));
     }
 //    • Given knowledge α and query β
 //      • For every possible world w
@@ -66,8 +67,8 @@ public class Model {
             for (int i = 1; i < symbols.size(); i++) {
                 rest.add(symbols.get(i));
             }
-            return (tt_check(KB,a,rest,union(m,true)))
-                    && (tt_check(KB,a,rest,union(m,false)));
+            return (tt_check(KB,a,rest,union(m,p,true)))
+                    && (tt_check(KB,a,rest,union(m,p,false)));
         }
     }
 
@@ -90,8 +91,8 @@ public class Model {
         return true;
     }
 
-    public static Model union(Model m, Boolean val){
-        m.models.add(val);
+    public static Model union(Model m, Integer p, Boolean val){
+        m.models.add(p,val);
         return m;
     }
 }
