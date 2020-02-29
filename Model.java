@@ -13,6 +13,15 @@ public class Model {
     }
 
 
+    public static void printModel(Model m){
+        ArrayList<Boolean> a = m.models;
+        System.out.print("[");
+        for (int i = 1; i < a.size(); i++) {
+            System.out.print(a.get(i) + " ");
+        }
+        System.out.print("]");
+        System.out.println();
+    }
     public static boolean  tt_Entails(CNF KB, CNF a){
 
         Model m = new Model(KB.varNum);
@@ -27,19 +36,18 @@ public class Model {
         for (int i = 1; i < KB.varNum+1; i++) {
             symbols.add(i);
         }
-        System.out.println(symbols);
+        System.out.println("Symbols: " + symbols);
+        System.out.println("TT-ENTAILS execution: ");
         return tt_check(KB,a, symbols, m);
     }
 
     public static boolean tt_check(CNF KB, CNF a, ArrayList<Integer> symbols, Model m){
         if(symbols.isEmpty()){
-            System.out.println("Here");
-            System.out.println(m.models);
+//            printModel(m);
             if(pl_true(KB,m)){
                 return pl_true(a,m);
             }
             else {
-                System.out.println("Lalal " + pl_true(a,m));
                 return true;
             }
         }

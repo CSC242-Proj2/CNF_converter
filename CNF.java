@@ -94,7 +94,7 @@ public class CNF {
     }
 
     //Part two CNF definitions
-    //{P, P ⇒ Q} |= Q
+    //{P, P ⇒ Q} =| Q
     public static CNF p_q(){
         CNF p_q = new CNF(2,2);
         int[] p = {1};
@@ -155,6 +155,24 @@ public class CNF {
         unicorn.addClause(r4);
 
         return unicorn;
+    }
+
+    public static void print_CNF(CNF c){
+        HashSet<int[]> set = c.clauses;
+        System.out.println("Clauses in CNF format: ");
+        System.out.print("[");
+        for(int[] arr: set){
+            System.out.print("{");
+            for (int i = 0; i < arr.length; i++) {
+                System.out.print(arr[i]);
+                if(i != arr.length-1){
+                    System.out.print(", ");
+                }
+            }
+            System.out.print("}");
+        }
+        System.out.print("]");
+        System.out.println();
     }
 
 
