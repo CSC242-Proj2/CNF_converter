@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Testing {
     //This class is supposed to have boolean operators
     //Negation
@@ -62,12 +64,15 @@ public class Testing {
     }
 
     public static void main(String[] args) {
+
         //Testing P, P => Q =| Q
         CNF q = new CNF(1,1);
         int[] q_val = {2};
         q.addClause(q_val);
 
         System.out.println("Testing P, P => Q =| Q");
+
+
         System.out.println("Result: " + Model.tt_Entails(CNF.p_q(),q));
     }
 
