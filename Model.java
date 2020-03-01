@@ -22,17 +22,12 @@ public class Model {
         System.out.print("]");
         System.out.println();
     }
+
+    //TT-ENTAILS method described in the boook
     public static boolean  tt_Entails(CNF KB, CNF a){
 
         Model m = new Model(KB.varNum);
         ArrayList<Integer> symbols = new ArrayList<>();
-//        for(int[] arr : KB.clauses){
-//            for (int i = 0; i < arr.length; i++) {
-//                if(!symbols.contains(Math.abs(arr[i]))){
-//                    symbols.add(Math.abs(arr[i]));
-//                }
-//            }
-//        }
         for (int i = 1; i < KB.varNum+1; i++) {
             symbols.add(i);
         }
@@ -41,6 +36,7 @@ public class Model {
         return tt_check(KB,a, symbols, m);
     }
 
+    //TT_CHECK method as decribed in book
     public static boolean tt_check(CNF KB, CNF a, ArrayList<Integer> symbols, Model m){
         if(symbols.isEmpty()){
 //            printModel(m);
@@ -53,34 +49,18 @@ public class Model {
         }
         else {
             Integer p = symbols.get(0);
-//            System.out.println("P is: " + p);
             ArrayList<Integer> rest = new ArrayList<>();
             for (int i = 1; i < symbols.size(); i++) {
                 rest.add(symbols.get(i));
             }
-//            System.out.println("Rest is " + rest);
             return (tt_check(KB,a,rest,union(m,p,true)))
                     && (tt_check(KB,a,rest,union(m,p,false)));
         }
     }
 
+    //Tests if model satisfies knowledge base
     public static boolean pl_true(CNF KB, Model m){
         HashSet<int[]> cnf = KB.clauses;
-//        for(int[] arr : cnf){
-//            for (int i = 0; i < arr.length; i++) {
-//                if(arr[i] > 0){
-//                    if(!m.models.get(Math.abs(arr[i]))){
-//                        return false;
-//                    }
-//                }
-//                else if(arr[i] < 0){
-//                    if(m.models.get(Math.abs(arr[i]))){
-//                        return false;
-//                    }
-//                }
-//            }
-//        }
-
         for(int[] cl : cnf){
             if(!clause_true(cl,m)){
                 return false;
@@ -89,6 +69,7 @@ public class Model {
         return true;
     }
 
+    //Helper function for pl_true
     public static boolean clause_true(int[] cl, Model m){
         for(int x : cl){
             boolean check = x > 0;
@@ -100,9 +81,33 @@ public class Model {
         return false;
     }
 
-
+    //Union function to be used in entilment methods
     public static Model union(Model m, Integer p, Boolean val){
         m.models.set(p,val);
         return m;
+    }
+
+    //GSAT method for part three
+    public static void gsat(CNF alpha, int maxFlips, int maxTries){
+        Model assignments = new Model(alpha.varNum);
+        for (int i = 1; i <= maxFlips; i++) {
+            randomTruth(assignments.models);
+            for (int j = 1; j <= maxTries; j++) {
+                if(pl_true(alpha,assignments)){
+
+                }
+            }
+        }
+    }
+
+    //Given an Model  have random truth assignments
+    private static void randomTruth(ArrayList<Boolean> assignments) {
+        for (int i = 1; i < assignments.size(); i++) {
+            if (Math.random() > 0.5) {
+                assignments.set(i, Boolean.TRUE);
+            } else {
+                assignments.set(i, Boolean.FALSE);
+            }
+        }
     }
 }

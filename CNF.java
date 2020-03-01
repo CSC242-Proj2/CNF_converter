@@ -51,6 +51,7 @@ public class CNF {
         }
     }
 
+    //Method to read cnf files and generate a list of clauses
     public void readFile(File file){
         try{
             Scanner sc = new Scanner(file);
@@ -157,6 +158,23 @@ public class CNF {
         return unicorn;
     }
 
+    //Part three questions clause creation
+    //(x1 ∨ x3 ∨ ¬x4) ∧ (x4) ∧ (x2 ∨ ¬x3)
+    public static CNF dimacs_1(){
+        CNF dimacs = new CNF(4,3);
+        //(x1 ∨ x3 ∨ ¬x4)
+        int[] first = {1,3,-4};
+        int[] second = {4};
+        int[] third = {2,-3};
+
+        dimacs.addClause(first);
+        dimacs.addClause(second);
+        dimacs.addClause(third);
+
+        return dimacs;
+
+    }
+
     public static void print_CNF(CNF c){
         HashSet<int[]> set = c.clauses;
         System.out.println("Clauses in CNF format: ");
@@ -175,10 +193,4 @@ public class CNF {
         System.out.println();
     }
 
-
-    public static void main(String[] args) {
-        CNF c = new CNF(0,0);
-        File file = new File("nqueens_8.cnf");
-        c.readFile(file);
-    }
 }

@@ -4,6 +4,7 @@ public class Testing {
 
     public static void main(String[] args) {
 
+        //Part two
         //Testing P, P => Q =| Q
         CNF q = new CNF(1,1);
         CNF modes = CNF.p_q();
@@ -120,8 +121,13 @@ public class Testing {
         System.out.println("Result: " + Model.tt_Entails(unicorn_KB,horned));
 
 
-
-
+        //Part three
+//        System.out.println("\nRunning Satisfiability checker for (x1 ∨ x3 ∨ ¬x4) ∧ (x4) ∧ (x2 ∨ ¬x3)");
+//        Model.gsat(CNF.dimacs_1(), 4, 4);
+//
+//        System.out.println("\nRunning Satisfiability checker for n-queens problems");
+//        System.out.println("N = 4 n-queen problem");
+//        CNF nqueens_4 = new CNF()
 
     }
 
