@@ -124,7 +124,7 @@ public class Model {
             System.out.println("NUmber is : " + num);
             if(num > max){
                 max = num;
-                result = assignments.indexOf(b);
+                result = i;
             }
         }
         System.out.println("result is: " + result);

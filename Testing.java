@@ -147,7 +147,7 @@ public class Testing {
 
         System.out.println("\nRunning Satisfiability checker for n-queens problems");
         System.out.println("N = 4 n-queen problem");
-        CNF nqueens_4 = new CNF(1,1);
+        CNF nqueens_4 = new CNF(16,84);
         nqueens_4.dimacs_read("nqueens_4");
         System.out.println("Enter reasonable MaxFlip value:  ");
         maxFlips = sc.nextInt();
