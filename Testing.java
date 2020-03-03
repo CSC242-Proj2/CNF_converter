@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Testing {
 
@@ -122,12 +123,45 @@ public class Testing {
 
 
         //Part three
-//        System.out.println("\nRunning Satisfiability checker for (x1 ∨ x3 ∨ ¬x4) ∧ (x4) ∧ (x2 ∨ ¬x3)");
-//        Model.gsat(CNF.dimacs_1(), 4, 4);
-//
-//        System.out.println("\nRunning Satisfiability checker for n-queens problems");
-//        System.out.println("N = 4 n-queen problem");
-//        CNF nqueens_4 = new CNF()
+        System.out.println("Testing for part three");
+        Scanner sc = new Scanner(System.in);
+
+        int maxFlips;
+        int maxTries;
+
+        System.out.println("\nRunning Satisfiability checker for (x1 ∨ x3 ∨ ¬x4) ∧ (x4) ∧ (x2 ∨ ¬x3)");
+        System.out.println("Enter reasonable MaxFlip value:  ");
+        maxFlips = sc.nextInt();
+        System.out.println("Enter reasonable MaxTries value:  ");
+        maxTries = sc.nextInt();
+        Model model = Model.gsat(CNF.dimacs_1(), maxFlips, maxTries, true);
+        if(model == null){
+            System.out.println("Sorry we could't find a satisfying model this time around." +
+                    "\nBetter luck next time");
+        }
+        else {
+            System.out.println("We found a satisfying Model: ");
+            Model.printModel(model);
+        }
+
+
+        System.out.println("\nRunning Satisfiability checker for n-queens problems");
+        System.out.println("N = 4 n-queen problem");
+        CNF nqueens_4 = new CNF(1,1);
+        nqueens_4.dimacs_read("nqueens_4");
+        System.out.println("Enter reasonable MaxFlip value:  ");
+        maxFlips = sc.nextInt();
+        System.out.println("Enter reasonable MaxTries value:  ");
+        maxTries = sc.nextInt();
+        model = Model.gsat(nqueens_4,maxFlips,maxTries,true);
+        if(model == null){
+            System.out.println("Sorry we could't find a satisfying model this time around." +
+                    "\nBetter luck next time");
+        }
+        else {
+            System.out.println("We found a satisfying Model: ");
+            Model.printModel(model);
+        }
 
     }
 

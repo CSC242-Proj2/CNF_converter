@@ -51,6 +51,11 @@ public class CNF {
         }
     }
 
+    public void dimacs_read(String st){
+        File file = new File(st);
+        readFile(file);
+    }
+
     //Method to read cnf files and generate a list of clauses
     public void readFile(File file){
         try{
