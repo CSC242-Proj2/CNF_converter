@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class Testing {
 
-    public static void main(String[] args) {
+    public static void partTwo(){
 
         //Part two
         //Testing P, P => Q =| Q
@@ -120,20 +120,21 @@ public class Testing {
         int[] horn = {4};
         horned.addClause(horn);
         System.out.println("Result: " + Model.tt_Entails(unicorn_KB,horned));
+    }
 
-
+    public static void partThree(){
         //Part three
+        System.out.println();
         System.out.println("Testing for part three");
         Scanner sc = new Scanner(System.in);
 
         int maxFlips;
         int maxTries;
 
+        System.out.println();
         System.out.println("\nRunning Satisfiability checker for (x1 ∨ x3 ∨ ¬x4) ∧ (x4) ∧ (x2 ∨ ¬x3)");
-        System.out.println("Enter reasonable MaxFlip value:  ");
-        maxFlips = sc.nextInt();
-        System.out.println("Enter reasonable MaxTries value:  ");
-        maxTries = sc.nextInt();
+        maxFlips = 20;
+        maxTries = 100;
         Model model = Model.gsat(CNF.dimacs_1(), maxFlips, maxTries, true);
         if(model == null){
             System.out.println("Sorry we could't find a satisfying model this time around." +
@@ -144,15 +145,17 @@ public class Testing {
             Model.printModel(model);
         }
 
-
+        System.out.println();
         System.out.println("\nRunning Satisfiability checker for n-queens problems");
+
+        System.out.println();
         System.out.println("N = 4 n-queen problem");
         CNF nqueens_4 = new CNF(16,84);
-        nqueens_4.dimacs_read("nqueens_4");
-        System.out.println("Enter reasonable MaxFlip value:  ");
-        maxFlips = sc.nextInt();
-        System.out.println("Enter reasonable MaxTries value:  ");
-        maxTries = sc.nextInt();
+        nqueens_4.dimacs_read("nqueens_4.cnf");
+        maxFlips = 10;
+        System.out.println("MaxFlip value:  " + maxFlips);
+        maxTries = 100;
+        System.out.println("MaxTries value:  " + maxTries);
         model = Model.gsat(nqueens_4,maxFlips,maxTries,true);
         if(model == null){
             System.out.println("Sorry we could't find a satisfying model this time around." +
@@ -163,6 +166,84 @@ public class Testing {
             Model.printModel(model);
         }
 
+        System.out.println();
+        System.out.println();
+        System.out.println("N = 8 n-queen problem");
+        CNF nqueens_8 = new CNF(64,744);
+        nqueens_8.dimacs_read("nqueens_8.cnf");
+        maxFlips = 16;
+        System.out.println("MaxFlip value:  " + maxFlips);
+        maxTries = 100;
+        System.out.println("MaxTries value:  " + maxTries);
+        model = Model.gsat(nqueens_8,maxFlips,maxTries,false);
+        if(model == null){
+            System.out.println("Sorry we could't find a satisfying model this time around." +
+                    "\nBetter luck next time");
+        }
+        else {
+            System.out.println("We found a satisfying Model: ");
+            Model.printModel(model);
+        }
+
+        System.out.println();
+        System.out.println();
+        System.out.println("N = 12 n-queen problem");
+        CNF nqueens_12 = new CNF(64,744);
+        nqueens_12.dimacs_read("nqueens_12.cnf");
+        maxFlips = 36;
+        System.out.println("MaxFlip value:  " + maxFlips);
+        maxTries = 100;
+        System.out.println("MaxTries value:  " + maxTries);
+        model = Model.gsat(nqueens_12,maxFlips,maxTries,false);
+        if(model == null){
+            System.out.println("Sorry we could't find a satisfying model this time around." +
+                    "\nBetter luck next time");
+        }
+        else {
+            System.out.println("We found a satisfying Model: ");
+            Model.printModel(model);
+        }
+
+        System.out.println();
+        System.out.println();
+        System.out.println("Quinn problem");
+        CNF quinn = new CNF(16,18);
+        quinn.dimacs_read("quinn.cnf.txt");
+        maxFlips = 10;
+        System.out.println("MaxFlip value:  " + maxFlips);
+        maxTries = 100;
+        System.out.println("MaxTries value:  " + maxTries);
+        model = Model.gsat(quinn,maxFlips,maxTries,false);
+        if(model == null){
+            System.out.println("Sorry we could't find a satisfying model this time around." +
+                    "\nBetter luck next time");
+        }
+        else {
+            System.out.println("We found a satisfying Model: ");
+            Model.printModel(model);
+        }
+
+        System.out.println();
+        System.out.println();
+        System.out.println("aim-50-1_6-yes1-4 problem");
+        CNF aim = new CNF(50,80);
+        aim.dimacs_read("aim-50-1_6-yes1-4.cnf.txt");
+        maxFlips = 36;
+        System.out.println("MaxFlip value:  " + maxFlips);
+        maxTries = 100;
+        System.out.println("MaxTries value:  " + maxTries);
+        model = Model.gsat(aim,maxFlips,maxTries,false);
+        if(model == null){
+            System.out.println("Sorry we could't find a satisfying model this time around." +
+                    "\nBetter luck next time");
+        }
+        else {
+            System.out.println("We found a satisfying Model: ");
+            Model.printModel(model);
+        }
+
+
     }
+
 
 }

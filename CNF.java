@@ -65,16 +65,12 @@ public class CNF {
                 Scanner inner = new Scanner(nextLine);
                 String first = inner.next();
                 if(first.equals("c")){
-                    System.out.println("The comments are: ");
-                    System.out.println(nextLine);
+
                 }
                 else if(first.equals("p")){
-                    System.out.println("Problem: " + nextLine);
                     type = inner.next();
-                    System.out.println("The type is " + type);
                     varNum = inner.nextInt();
                     clauseNum = inner.nextInt();
-                    System.out.println("The number of vars is " + varNum + " clauses " + clauseNum);
                 }
                 else  {
                     ArrayList<Integer> cnfClauses = new ArrayList<>();
@@ -92,6 +88,7 @@ public class CNF {
                 }
             }
         }catch (Exception e){
+//            e.printStackTrace();
         }
     }
 

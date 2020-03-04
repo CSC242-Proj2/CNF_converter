@@ -104,10 +104,8 @@ public class Model {
                     System.out.println("Model: ");
                     printModel(assignments);
                 }
-
             }
         }
-        System.out.println("UNSATISFIABLE");
         return null;
     }
 
@@ -121,13 +119,11 @@ public class Model {
             ArrayList<Boolean> newList = flip(assignments,assignments.indexOf(b));
             newModel.models = newList;
             int num = getNumTrueClauses(clauses,newModel);
-            System.out.println("NUmber is : " + num);
             if(num > max){
                 max = num;
                 result = i;
             }
         }
-        System.out.println("result is: " + result);
         return result;
         
     }
